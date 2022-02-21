@@ -10,22 +10,24 @@ public class StartService{
      }
 
     public Courier generateRandomCourier(int id) {
-        Courier courier = new Courier();
-        courier.setId(id);
+        Courier courier;
         int random = ThreadLocalRandom.current().nextInt(0, 4);
         switch (random) {
             case 0:
-                courier.setStatus(Courier.Status.AVAILABLE);
+                courier = new Courier(id, Courier.Status.AVAILABLE);
                 break;
             case 1:
-                courier.setStatus(Courier.Status.BUSY);
+                courier = new Courier(id, Courier.Status.BUSY);
                 break;
             case 2:
-                courier.setStatus(Courier.Status.DELIVERING);
-                courier.setOrderId(ThreadLocalRandom.current().nextInt(0, 120));
+                courier = new Courier(id, Courier.Status.DELIVERING);
+                courier.setOrderId(ThreadLocalRandom.current().nextInt(3, 120));
                 break;
             case 3:
-                courier.setStatus(Courier.Status.OFFLINE);
+                courier = new Courier(id, Courier.Status.OFFLINE);
+                break;
+            default:
+                courier = new Courier(id, Courier.Status.UNKNOWN);
                 break;
         }
         return courier;
